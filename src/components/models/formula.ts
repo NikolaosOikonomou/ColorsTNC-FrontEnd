@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { ProductFormula } from "./productFormula";
 
 export interface Formula{
   ColorFormulaID:number;
@@ -9,6 +9,6 @@ export interface Formula{
   ServiceType:string;
   FormulasPhotosid:number;
   FormulasPhotosUrl:string;
-  Products:Product[];
+  ProductFormulas:ProductFormula[];
 }
 

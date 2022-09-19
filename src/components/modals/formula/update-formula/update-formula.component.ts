@@ -5,6 +5,8 @@ import { FormulaComponent } from 'src/components/formula/formula.component';
 import { FormulaService } from 'src/components/formula/formula.service';
 import { Formula } from 'src/components/models/formula';
 import { Product } from 'src/components/models/product';
+import { ProductFormula } from 'src/components/models/productFormula';
+import { CreateFormulaComponent } from '../create-formula/create-formula.component';
 import { UpdateFormulaService } from './update-formula.service';
 
 @Component({
@@ -15,7 +17,9 @@ import { UpdateFormulaService } from './update-formula.service';
 export class UpdateFormulaComponent implements OnInit {
 
   @Input() onUpdateFormula!: Formula;
+  usedQuantities!:number[];
   selectedProducts: Product[] = new Array<Product>;
+  selectedProductFormulas: ProductFormula[] = new Array<ProductFormula>;
   productTest!: any;
   products!:Product[];
   formulaProductIds!:number;
@@ -23,11 +27,21 @@ export class UpdateFormulaComponent implements OnInit {
 
   constructor(private formulaComponent: FormulaComponent, private formulaService:FormulaService, public updateFormulaService:UpdateFormulaService) { }
 
+  mappingSelectedProducts(){
+    for (let i= 0; i<this.selectedProducts.length;i++ ){
+      this.selectedProductFormulas[i].Brand= this.selectedProducts[i].Brand;
+      this.selectedProductFormulas[i].ColorCode= this.selectedProducts[i].ColorCode;
+      this.selectedProductFormulas[i].UsedQuantity = this.usedQuantities[i];
+      
+    }
+  }
+
   UpdateFormulaHandler(){
     this.updateFormulaService.showUpdateForm = false;
-    this.onUpdateFormula.Products = this.selectedProducts;
+    this.mappingSelectedProducts();
+    this.onUpdateFormula.ProductFormulas = this.selectedProductFormulas;
     console.log("EDWWWWWWWW");
-    console.log( this.onUpdateFormula.Products);
+    console.log( this.onUpdateFormula.ProductFormulas);
     this.updateFormulaService.showUpdateForm = false;
     this.formulaService.UpdateFormula(this.onUpdateFormula).subscribe(
 

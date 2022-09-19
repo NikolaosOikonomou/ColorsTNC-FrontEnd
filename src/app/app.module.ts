@@ -22,6 +22,7 @@ import { ProductComponent } from '../components/product/product.component';
 import { CreateProductComponent } from '../components/modals/product/create-product/create-product.component';
 import { UpdateProductComponent } from '../components/modals/product/update-product/update-product.component';
 import { DetailsFormulaComponent } from 'src/components/details-formula/details-formula.component';
+import { PaypalButtonsComponent } from '../components/paypal-buttons/paypal-buttons.component';
 
 
 
@@ -43,7 +44,8 @@ import { DetailsFormulaComponent } from 'src/components/details-formula/details-
     ProductComponent,
     CreateProductComponent,
     UpdateProductComponent,
-    DetailsFormulaComponent
+    DetailsFormulaComponent,
+    PaypalButtonsComponent
   ],
   imports: [
     BrowserModule,

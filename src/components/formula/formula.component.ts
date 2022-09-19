@@ -5,6 +5,7 @@ import { UpdateFormulaService } from '../modals/formula/update-formula/update-fo
 import { FormulaService } from './formula.service';
 import { Formula } from '../models/formula';
 import { ProductComponent } from '../product/product.component';
+import { ProductFormula } from '../models/productFormula';
 import { Product } from '../models/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';

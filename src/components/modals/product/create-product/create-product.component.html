@@ -16,10 +16,6 @@
         <input type="text" class="form-control"  #productColorCode>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text mySpanWidth">UsedQuantity</span>
-        <input type="number" class="form-control" #productUsedQuantity />
-      </div>
-      <div class="input-group mb-3">
         <span class="input-group-text mySpanWidth">TubeQuantity</span>
         <input type="number" class="form-control" #productTubeQuantity />
       </div>
@@ -30,7 +26,7 @@
     </div>
     <div id="actions">
       <button class="btn btn-success"
-        (click)="CreateProductHandler(productBrand.value, productColorCode.value, productUsedQuantity.valueAsNumber, productTubeQuantity.valueAsNumber)">
+        (click)="CreateProductHandler(productBrand.value, productColorCode.value, productTubeQuantity.valueAsNumber)">
         Create</button>
       <button class="btn btn-danger" (click)="createProductService.showCreateProductForm = false">Exit</button>
     </div>

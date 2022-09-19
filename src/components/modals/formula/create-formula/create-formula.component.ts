@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Photo } from 'src/components/models/formulaPhoto';
 import { Observable, Subscriber } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProductFormula } from 'src/components/models/productFormula';
 
 
 @Component({
@@ -21,6 +22,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CreateFormulaComponent implements OnInit, OnDestroy {
 
   @Input() formulaProducts!: Formula[];
+  usedQuantities!: number[];
+  selectedProductFormulas!: ProductFormula[];
   selectedProducts!: Product[];
   productsBrands!: string[];
   products!: Product[];
@@ -43,12 +46,19 @@ export class CreateFormulaComponent implements OnInit, OnDestroy {
   getFormulaProduct(e:any){
     console.log(e);
   }
-  
+  mappingSelectedProducts(){
+    for (let i= 0; i<this.selectedProducts.length;i++ ){
+      this.selectedProductFormulas[i].Brand= this.selectedProducts[i].Brand;
+      this.selectedProductFormulas[i].ColorCode= this.selectedProducts[i].ColorCode;
+      this.selectedProductFormulas[i].UsedQuantity = this.usedQuantities[i];
+      
+    }
+  }
   CreateFormulaHandler(formulaName: string, formulaServiceType: string, formulaDuration: string, formulaCost: number): void {
     this.createFormulaService.showCreateFormulaForm = false;
     let formulaDate;
-    
-    this.formulaService.CreateFormula({ FormulaName: formulaName, CreationDate: formulaDate,Cost: formulaCost, Duration: formulaDuration, ServiceType: formulaServiceType, FormulasPhotosid: this.photoFormulaid,FormulasPhotosUrl:this.testUrlPhoto, Products: this.selectedProducts } as Formula)
+    this.mappingSelectedProducts();
+    this.formulaService.CreateFormula({ FormulaName: formulaName, CreationDate: formulaDate,Cost: formulaCost, Duration: formulaDuration, ServiceType: formulaServiceType, FormulasPhotosid: this.photoFormulaid,FormulasPhotosUrl:this.testUrlPhoto, ProductFormulas: this.selectedProductFormulas } as Formula)
       .subscribe(
         {
           next: response => {console.log(response)},
